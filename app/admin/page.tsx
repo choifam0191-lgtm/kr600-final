@@ -272,9 +272,28 @@ export default function AdminPage() {
                         placeholder="/icon.svg 또는 https://example.com/icon.svg"
                         className="w-full px-3 py-2 border border-navy-300 rounded focus:outline-none focus:ring-2 focus:ring-navy-500 text-black text-sm"
                       />
-                      <p className="mt-1 text-xs text-navy-500">
+                      <p className="mt-1 text-xs text-navy-500 mb-2">
                         SVG 또는 이미지 파일의 URL을 입력하세요. 비워두면 기본 아이콘이 사용됩니다.
                       </p>
+                      {/* Icon Preview */}
+                      {feature.iconUrl && (
+                        <div className="mt-2 w-16 h-16 border border-navy-200 rounded overflow-hidden bg-navy-50 flex items-center justify-center">
+                          <img
+                            src={feature.iconUrl}
+                            alt="아이콘 미리보기"
+                            className="max-w-full max-h-full object-contain"
+                            onError={(e) => {
+                              const img = e.target as HTMLImageElement;
+                              img.style.display = "none";
+                              const errorDiv = document.createElement("div");
+                              errorDiv.className = "text-navy-400 text-xs text-center px-2";
+                              errorDiv.textContent = "불가";
+                              img.parentElement?.appendChild(errorDiv);
+                            }}
+                            key={feature.iconUrl}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -329,9 +348,29 @@ export default function AdminPage() {
                 placeholder="/kr-600.jpg 또는 https://example.com/image.jpg"
                 className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
               />
-              <p className="mt-1 text-xs text-navy-500">
+              <p className="mt-1 text-xs text-navy-500 mb-3">
                 public 폴더 내 이미지는 /파일명 형식으로, 외부 이미지는 전체 URL을 입력하세요.
               </p>
+              {/* Hero Image Preview */}
+              {content.heroImageUrl && (
+                <div className="mt-3 w-full max-w-md mx-auto border border-navy-200 rounded-lg overflow-hidden bg-navy-50">
+                  <div className="relative w-full aspect-square">
+                    <img
+                      src={content.heroImageUrl}
+                      alt="미리보기"
+                      className="w-full h-full object-contain"
+                      onError={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        img.style.display = "none";
+                        const errorDiv = document.createElement("div");
+                        errorDiv.className = "w-full h-full flex items-center justify-center text-navy-400 text-sm";
+                        errorDiv.textContent = "이미지를 불러올 수 없습니다";
+                        img.parentElement?.appendChild(errorDiv);
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Partner Images */}
@@ -357,14 +396,20 @@ export default function AdminPage() {
                       className="w-full px-3 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black text-sm"
                     />
                     {imageUrl && (
-                      <div className="w-full aspect-square border border-navy-200 rounded overflow-hidden bg-navy-50">
+                      <div className="w-full aspect-square border border-navy-200 rounded overflow-hidden bg-navy-50 relative">
                         <img
                           src={imageUrl}
                           alt={`파트너사 ${index + 1}`}
                           className="w-full h-full object-contain"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = "none";
+                            const img = e.target as HTMLImageElement;
+                            img.style.display = "none";
+                            const errorDiv = document.createElement("div");
+                            errorDiv.className = "absolute inset-0 flex items-center justify-center text-navy-400 text-xs";
+                            errorDiv.textContent = "로드 실패";
+                            img.parentElement?.appendChild(errorDiv);
                           }}
+                          key={imageUrl}
                         />
                       </div>
                     )}
@@ -381,7 +426,7 @@ export default function AdminPage() {
               <button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="w-full bg-navy-900 text-white py-4 px-6 rounded-lg font-semibold hover:bg-navy-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSaving ? (
                   <>

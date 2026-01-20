@@ -7,8 +7,8 @@ export function CTASection() {
       {/* Background Effect */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary/10 via-background to-background opacity-30" />
       
-      <div className="container relative z-10 px-4 md:px-6">
-        <div className="max-w-6xl mx-auto text-center">
+      <div className="w-full max-w-7xl mx-auto px-4 relative z-10">
+        <div className="flex flex-col items-center text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
             지금 바로 <span className="text-primary">KR-600</span>을
             <br />

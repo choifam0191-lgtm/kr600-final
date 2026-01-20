@@ -39,8 +39,8 @@ export function HeroSection() {
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary via-background to-background opacity-50" />
       
-      <div className="container relative z-10 px-4 md:px-6">
-        <div className="max-w-6xl mx-auto flex flex-col items-center justify-center text-center min-h-[60vh]">
+      <div className="w-full max-w-7xl mx-auto px-4 relative z-10">
+        <div className="flex flex-col items-center justify-center text-center min-h-[60vh]">
           {/* Hero Image */}
           {heroImageUrl && (
             <div className="relative w-full max-w-md mb-8 aspect-square">

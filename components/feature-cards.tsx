@@ -80,9 +80,9 @@ export function FeatureCards() {
 
   return (
     <section id="features" className="py-24 bg-background">
-      <div className="container px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+      <div className="w-full max-w-7xl mx-auto px-4">
+        <div className="flex flex-col items-center">
+          <div className="text-center mb-16 w-full">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               왜 <span className="text-primary">KR-600</span>인가요?
             </h2>
@@ -91,7 +91,7 @@ export function FeatureCards() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 w-full">
             {features.map((feature, index) => (
               <Card 
                 key={index} 
