@@ -57,9 +57,26 @@ export default function AdminPage() {
     const savedContent = localStorage.getItem("kr600-content");
     if (savedContent) {
       try {
-        setContent(JSON.parse(savedContent));
+        const parsedContent = JSON.parse(savedContent);
+        // features 배열이 없거나 빈 배열인 경우 기본값 사용
+        if (!parsedContent.features || !Array.isArray(parsedContent.features) || parsedContent.features.length === 0) {
+          parsedContent.features = defaultContent.features;
+        }
+        // 각 feature에 iconUrl 필드가 없는 경우 추가
+        parsedContent.features = parsedContent.features.map((feature: any, index: number) => ({
+          title: feature.title || defaultContent.features[index]?.title || "",
+          description: feature.description || defaultContent.features[index]?.description || "",
+          iconUrl: feature.iconUrl || "",
+        }));
+        // partnerImages 배열이 없는 경우 기본값 사용
+        if (!parsedContent.partnerImages || !Array.isArray(parsedContent.partnerImages)) {
+          parsedContent.partnerImages = Array(15).fill("");
+        }
+        setContent(parsedContent);
       } catch (error) {
         console.error("Failed to load content:", error);
+        // 에러 발생 시 기본값 사용
+        setContent(defaultContent);
       }
     }
   }, []);

@@ -41,12 +41,25 @@ export function HeroSection() {
       
       <div className="container relative z-10 px-4 md:px-6">
         <div className="flex flex-col items-center justify-center text-center min-h-[60vh]">
+          {/* Hero Image */}
+          {heroImageUrl && (
+            <div className="relative w-full max-w-md mb-8 aspect-square">
+              <Image
+                src={heroImageUrl}
+                alt="KR-600 프리미엄 무전기"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          )}
+          
           {/* Main Copy */}
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-balance leading-[1.3] w-full max-w-4xl mb-6">
             <span className="text-foreground">
-              기존 사용 기기 반납 시,
+              최신형 <span className="text-primary">KR-600</span>
               <br />
-              최신형 KR-600 보상판매 특별 할인
+              보상판매 특별 할인
             </span>
           </h1>
           
@@ -54,7 +67,7 @@ export function HeroSection() {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
             브랜드와 기종 관계없이 보유하고 계신 장비를 반납하시면
             <br />
-            대당 50,000원 즉시 지원해 드립니다.
+            <span className="font-bold text-primary">대당 50,000원</span> 즉시 지원해 드립니다.
           </p>
           
           {/* Price Visualization */}

@@ -42,10 +42,9 @@ export function AboutSection() {
             <span className="text-primary">영우테크</span> 소개
           </h2>
           <div className="prose prose-lg max-w-none text-muted-foreground">
-            <p className="text-lg leading-relaxed mb-4">
-              영우테크는 호스피탈리티 산업을 위한 전문 통신 솔루션을 제공하는 기업입니다.
-            </p>
             <p className="text-lg leading-relaxed mb-12">
+              영우테크는 30년 경력의 전문 통신 솔루션 기업입니다.
+              <br />
               오랜 경험과 기술력을 바탕으로 호텔, 웨딩홀, 대형 식당 등 다양한 고객들에게
               최적의 무전기 솔루션을 제공하고 있습니다.
             </p>
@@ -54,7 +53,7 @@ export function AboutSection() {
           {/* Trust Badge */}
           {validImages.length > 0 && (
             <div className="mt-12 pt-8 border-t border-border">
-              <p className="text-sm text-muted-foreground mb-6">영우테크 파트너사</p>
+              <p className="text-base font-semibold text-foreground mb-6">영우테크 파트너사</p>
               <div className="grid grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto">
                 {partnerImages.map((imageUrl, index) => {
                   if (!imageUrl || imageUrl.trim() === "") return null

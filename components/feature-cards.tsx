@@ -37,18 +37,34 @@ export function FeatureCards() {
       if (savedContent) {
         try {
           const content = JSON.parse(savedContent)
-          if (content.features && Array.isArray(content.features)) {
-            // 아이콘 URL이 있는 경우 기본 아이콘과 병합
-            const mergedFeatures = content.features.map((feature: any, index: number) => ({
-              ...defaultFeatures[index] || { icon: Radio, title: "", description: "" },
-              ...feature,
-            }))
+          if (content.features && Array.isArray(content.features) && content.features.length > 0) {
+            // localStorage에 저장된 features를 사용하고, icon 필드는 defaultFeatures에서 매핑
+            const mergedFeatures = content.features.map((feature: any, index: number) => {
+              // 기본 아이콘 배열 (순서대로 Radio, Volume2, Battery)
+              const defaultIcons = [Radio, Volume2, Battery]
+              const defaultIcon = defaultIcons[index] || Radio
+              
+              return {
+                icon: defaultIcon, // React 컴포넌트는 저장할 수 없으므로 기본값에서 매핑
+                title: feature.title || "",
+                description: feature.description || "",
+                iconUrl: feature.iconUrl || "",
+              }
+            })
             setFeatures(mergedFeatures)
             setIconErrors({}) // 새로 로드할 때 에러 상태 초기화
+          } else {
+            // localStorage에 features가 없으면 기본값 사용
+            setFeatures(defaultFeatures)
           }
         } catch (error) {
           console.error("Failed to load features:", error)
+          // 에러 발생 시 기본값 사용
+          setFeatures(defaultFeatures)
         }
+      } else {
+        // localStorage에 데이터가 없으면 기본값 사용
+        setFeatures(defaultFeatures)
       }
     }
 

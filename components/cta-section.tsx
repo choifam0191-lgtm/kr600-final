@@ -36,10 +36,14 @@ export function CTASection() {
             </Button>
             
             {/* 영우테크 정보 */}
-            <div className="mt-6 pt-6 border-t border-border/50 text-center">
-              <p className="text-sm font-semibold text-foreground mb-2">영우테크</p>
-              <p className="text-sm text-muted-foreground">전화번호: 031-523-2340</p>
-              <p className="text-sm text-muted-foreground">이메일: hichoi333@naver.com</p>
+            <div className="mt-8 pt-8 border-t border-border/50">
+              <div className="bg-card/50 border border-border rounded-lg p-6 max-w-md mx-auto">
+                <p className="text-lg font-bold text-foreground mb-4">영우테크</p>
+                <div className="space-y-2 text-base text-muted-foreground">
+                  <p>전화번호: 031-523-2340</p>
+                  <p>이메일: hichoi333@naver.com</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
