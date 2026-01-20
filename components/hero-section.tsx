@@ -40,7 +40,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary via-background to-background opacity-50" />
       
       <div className="container relative z-10 px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center text-center min-h-[60vh]">
+        <div className="max-w-6xl mx-auto flex flex-col items-center justify-center text-center min-h-[60vh]">
           {/* Hero Image */}
           {heroImageUrl && (
             <div className="relative w-full max-w-md mb-8 aspect-square">
@@ -55,7 +55,7 @@ export function HeroSection() {
           )}
           
           {/* Main Copy */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-balance leading-[1.3] w-full max-w-4xl mb-6">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-balance leading-[1.3] w-full mb-6">
             <span className="text-foreground">
               최신형 <span className="text-primary">KR-600</span>
               <br />

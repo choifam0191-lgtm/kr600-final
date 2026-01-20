@@ -52,7 +52,7 @@ export function CatalogSection() {
   return (
     <section id="catalog" className="py-16 bg-secondary">
       <div className="container px-4 md:px-6">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto text-center">
           <p className="text-lg text-muted-foreground mb-6">
             더 자세한 정보가 필요하신가요? <span className="text-primary font-semibold">KR-600</span>의 상세 스펙을 확인해보세요.
           </p>

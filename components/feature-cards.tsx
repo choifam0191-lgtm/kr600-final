@@ -81,16 +81,17 @@ export function FeatureCards() {
   return (
     <section id="features" className="py-24 bg-background">
       <div className="container px-4 md:px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            왜 <span className="text-primary">KR-600</span>인가요?
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            호스피탈리티 산업에 특화된 기능으로 완벽한 고객 서비스를 제공하세요
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              왜 <span className="text-primary">KR-600</span>인가요?
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              호스피탈리티 산업에 특화된 기능으로 완벽한 고객 서비스를 제공하세요
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <Card 
               key={index} 

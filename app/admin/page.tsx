@@ -51,6 +51,8 @@ export default function AdminPage() {
   const router = useRouter();
   const [content, setContent] = useState<ContentData>(defaultContent);
   const [saved, setSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     // 로컬 스토리지에서 저장된 콘텐츠 불러오기
@@ -81,15 +83,31 @@ export default function AdminPage() {
     }
   }, []);
 
-  const handleSave = () => {
-    localStorage.setItem("kr600-content", JSON.stringify(content));
-    // 같은 탭에서 변경 사항을 감지하기 위한 커스텀 이벤트 발생
-    window.dispatchEvent(new Event("localStorageUpdated"));
-    setSaved(true);
-    setTimeout(() => {
-      setSaved(false);
-      router.push("/");
-    }, 1500);
+  const handleSave = async () => {
+    setIsSaving(true);
+    
+    try {
+      // localStorage에 저장
+      localStorage.setItem("kr600-content", JSON.stringify(content));
+      
+      // 같은 탭에서 변경 사항을 감지하기 위한 커스텀 이벤트 발생
+      window.dispatchEvent(new Event("localStorageUpdated"));
+      
+      // 저장 완료 알림 표시
+      setSaved(true);
+      setShowToast(true);
+      
+      // 2초 후 메인 페이지로 이동
+      setTimeout(() => {
+        setIsSaving(false);
+        setShowToast(false);
+        router.push("/");
+      }, 2000);
+    } catch (error) {
+      console.error("저장 중 오류 발생:", error);
+      setIsSaving(false);
+      alert("저장 중 오류가 발생했습니다. 다시 시도해주세요.");
+    }
   };
 
   const handleFeatureChange = (
@@ -359,13 +377,35 @@ export default function AdminPage() {
             </div>
 
             {/* Save Button */}
-            <div className="pt-6">
+            <div className="pt-6 space-y-4">
               <button
                 onClick={handleSave}
-                className="w-full bg-navy-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-navy-800 transition-colors"
+                disabled={isSaving}
+                className="w-full bg-navy-900 text-white py-4 px-6 rounded-lg font-semibold hover:bg-navy-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                {saved ? "저장 완료! 메인 페이지로 이동합니다..." : "저장하기"}
+                {isSaving ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    저장 중...
+                  </>
+                ) : (
+                  "웹사이트에 반영하기"
+                )}
               </button>
+              
+              {/* Toast 알림 */}
+              {showToast && (
+                <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2 animate-in slide-in-from-top-5">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="font-semibold">저장 완료!</span>
+                  <span>메인 페이지로 이동합니다...</span>
+                </div>
+              )}
             </div>
           </div>
         </div>

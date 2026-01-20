@@ -37,7 +37,7 @@ export function AboutSection() {
   return (
     <section id="about" className="py-24 bg-background">
       <div className="container px-4 md:px-6">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             <span className="text-primary">영우테크</span> 소개
           </h2>
