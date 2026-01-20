@@ -6,6 +6,7 @@ import { FeatureCards } from "@/components/feature-cards"
 import { CatalogSection } from "@/components/catalog-section"
 import { AboutSection } from "@/components/about-section"
 import { CTASection } from "@/components/cta-section"
+import { Footer } from "@/components/footer"
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <CatalogSection />
         <CTASection />
       </main>
+      <Footer />
     </>
   )
 }

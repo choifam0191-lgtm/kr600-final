@@ -10,12 +10,13 @@ export function CTASection() {
       <div className="w-full max-w-7xl mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-            지금 바로 <span className="text-primary">KR-600</span>을
+            더 자세한 정보가 필요하신가요?
             <br />
-            도입하세요
+            <span className="text-primary">KR-600</span>의 상세 스펙을 확인해보세요.
           </h2>
           <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
             전문 상담사가 귀사에 맞는 최적의 솔루션을 제안해 드립니다.
+            <br />
             카카오톡으로 간편하게 문의하세요.
           </p>
           
@@ -36,7 +37,7 @@ export function CTASection() {
             </Button>
             
             {/* 영우테크 정보 */}
-            <div className="mt-8 pt-8 border-t border-border/50">
+            <div className="mt-4 pt-6 border-t border-border/50">
               <div className="bg-card/50 border border-border rounded-lg p-6 max-w-md mx-auto">
                 <p className="text-lg font-bold text-foreground mb-4">영우테크</p>
                 <div className="space-y-2 text-base text-muted-foreground">
