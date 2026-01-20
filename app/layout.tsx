@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "KR-600 프리미엄 무전기",
   description: "호텔, 웨딩홀, 대형 식당을 위한 전문 무전기",
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 export default function RootLayout({
