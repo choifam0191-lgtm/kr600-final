@@ -92,38 +92,39 @@ export function FeatureCards() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <Card 
-              key={index} 
-              className="group bg-card border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
-            >
-              <CardContent className="p-8 flex flex-col items-center text-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  {feature.iconUrl && feature.iconUrl.trim() !== "" && !iconErrors[index] ? (
-                    <div className="relative w-8 h-8">
-                      <Image
-                        src={feature.iconUrl}
-                        alt={feature.title}
-                        fill
-                        className="object-contain"
-                        onError={() => {
-                          setIconErrors(prev => ({ ...prev, [index]: true }))
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <feature.icon className="w-8 h-8 text-primary" />
-                  )}
-                </div>
-                <h3 className="text-xl font-semibold text-card-foreground">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+            {features.map((feature, index) => (
+              <Card 
+                key={index} 
+                className="group bg-card border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+              >
+                <CardContent className="p-8 flex flex-col items-center text-center gap-4">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    {feature.iconUrl && feature.iconUrl.trim() !== "" && !iconErrors[index] ? (
+                      <div className="relative w-8 h-8">
+                        <Image
+                          src={feature.iconUrl}
+                          alt={feature.title}
+                          fill
+                          className="object-contain"
+                          onError={() => {
+                            setIconErrors(prev => ({ ...prev, [index]: true }))
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <feature.icon className="w-8 h-8 text-primary" />
+                    )}
+                  </div>
+                  <h3 className="text-xl font-semibold text-card-foreground">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>
