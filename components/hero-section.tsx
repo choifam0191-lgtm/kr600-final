@@ -75,14 +75,19 @@ export function HeroSection() {
             </p>
             
             {/* Price Visualization */}
-            <div className="flex items-center justify-center md:justify-start gap-3 md:gap-4 py-4 mb-8">
-              <span className="text-xl md:text-2xl text-muted-foreground line-through">
-                169,000원
-              </span>
-              <ArrowRight className="w-6 h-6 md:w-8 md:h-8 text-muted-foreground" />
-              <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-red-600">
-                119,000원
-              </span>
+            <div className="flex flex-col items-center md:items-start gap-2 py-4 mb-8">
+              <div className="flex items-center justify-center md:justify-start gap-3 md:gap-4">
+                <span className="text-xl md:text-2xl text-muted-foreground line-through">
+                  169,000원
+                </span>
+                <ArrowRight className="w-6 h-6 md:w-8 md:h-8 text-muted-foreground" />
+                <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-red-600">
+                  119,000원
+                </span>
+              </div>
+              <p className="text-lg md:text-xl font-bold text-yellow-400 mt-2">
+                대량 구매시 추가 할인
+              </p>
             </div>
             
             {/* CTA Button */}

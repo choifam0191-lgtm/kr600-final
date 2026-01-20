@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { Radio, Volume2, Battery } from "lucide-react"
+import { Radio, Volume2, BatteryFull } from "lucide-react"
 import Image from "next/image"
 
 const defaultFeatures = [
@@ -19,7 +19,7 @@ const defaultFeatures = [
     iconUrl: "",
   },
   {
-    icon: Battery,
+    icon: BatteryFull,
     title: "장시간 배터리",
     description: "한 번 충전으로 48시간 이상 사용 가능. 바쁜 이벤트 시즌에도 걱정 없는 운영.",
     iconUrl: "",
@@ -40,8 +40,8 @@ export function FeatureCards() {
           if (content.features && Array.isArray(content.features) && content.features.length > 0) {
             // localStorage에 저장된 features를 사용하고, icon 필드는 defaultFeatures에서 매핑
             const mergedFeatures = content.features.map((feature: any, index: number) => {
-              // 기본 아이콘 배열 (순서대로 Radio, Volume2, Battery)
-              const defaultIcons = [Radio, Volume2, Battery]
+              // 기본 아이콘 배열 (순서대로 Radio, Volume2, BatteryFull)
+              const defaultIcons = [Radio, Volume2, BatteryFull]
               const defaultIcon = defaultIcons[index] || Radio
               
               return {

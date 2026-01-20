@@ -38,6 +38,16 @@ export function AboutSection() {
     <section id="about" className="py-24 bg-background">
       <div className="w-full max-w-7xl mx-auto px-4">
         <div className="flex flex-col items-center text-center">
+          {/* Company Logo */}
+          <div className="mb-4">
+            <Image
+              src="/logo.png"
+              alt="영우테크 로고"
+              width={120}
+              height={120}
+              className="w-32 h-auto"
+            />
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             <span className="text-primary">영우테크</span> 소개
           </h2>
