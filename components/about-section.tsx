@@ -1,4 +1,39 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import Image from "next/image"
+
 export function AboutSection() {
+  const [partnerImages, setPartnerImages] = useState<string[]>(Array(15).fill(""))
+
+  useEffect(() => {
+    // localStorage에서 파트너사 이미지 불러오기
+    const loadPartnerImages = () => {
+      const savedContent = localStorage.getItem("kr600-content")
+      if (savedContent) {
+        try {
+          const content = JSON.parse(savedContent)
+          if (content.partnerImages && Array.isArray(content.partnerImages)) {
+            setPartnerImages(content.partnerImages)
+          }
+        } catch (error) {
+          console.error("Failed to load partner images:", error)
+        }
+      }
+    }
+
+    loadPartnerImages()
+    window.addEventListener("storage", loadPartnerImages)
+    window.addEventListener("localStorageUpdated", loadPartnerImages)
+
+    return () => {
+      window.removeEventListener("storage", loadPartnerImages)
+      window.removeEventListener("localStorageUpdated", loadPartnerImages)
+    }
+  }, [])
+
+  const validImages = partnerImages.filter(url => url && url.trim() !== "")
+
   return (
     <section id="about" className="py-24 bg-background">
       <div className="container px-4 md:px-6">
@@ -17,15 +52,32 @@ export function AboutSection() {
           </div>
           
           {/* Trust Badge */}
-          <div className="mt-12 pt-8 border-t border-border">
-            <p className="text-sm text-muted-foreground mb-4">영우테크 파트너사</p>
-            <div className="flex items-center justify-center gap-8 flex-wrap opacity-60">
-              <span className="text-foreground font-semibold">롯데호텔</span>
-              <span className="text-foreground font-semibold">신라호텔</span>
-              <span className="text-foreground font-semibold">그랜드 하얏트</span>
-              <span className="text-foreground font-semibold">더 플라자</span>
+          {validImages.length > 0 && (
+            <div className="mt-12 pt-8 border-t border-border">
+              <p className="text-sm text-muted-foreground mb-6">영우테크 파트너사</p>
+              <div className="grid grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto">
+                {partnerImages.map((imageUrl, index) => {
+                  if (!imageUrl || imageUrl.trim() === "") return null
+                  return (
+                    <div
+                      key={index}
+                      className="relative w-full aspect-square flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity"
+                    >
+                      <Image
+                        src={imageUrl}
+                        alt={`파트너사 ${index + 1}`}
+                        fill
+                        className="object-contain"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none"
+                        }}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

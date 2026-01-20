@@ -11,10 +11,12 @@ interface ContentData {
   features: {
     title: string;
     description: string;
+    iconUrl: string;
   }[];
   kakaoLink: string;
   catalogLink: string;
   heroImageUrl: string;
+  partnerImages: string[];
 }
 
 const defaultContent: ContentData = {
@@ -26,19 +28,23 @@ const defaultContent: ContentData = {
     {
       title: "뛰어난 음질",
       description: "선명하고 깨끗한 음질로 소통의 품질을 높입니다.",
+      iconUrl: "",
     },
     {
       title: "장시간 배터리",
       description: "하루 종일 사용 가능한 강력한 배터리 성능을 제공합니다.",
+      iconUrl: "",
     },
     {
       title: "세련된 디자인",
       description: "프로페셔널한 외관으로 업무 환경에 완벽하게 어울립니다.",
+      iconUrl: "",
     },
   ],
   kakaoLink: "https://open.kakao.com/o/your-channel",
   catalogLink: "",
   heroImageUrl: "/kr-600.jpg",
+  partnerImages: Array(15).fill(""),
 };
 
 export default function AdminPage() {
@@ -71,7 +77,7 @@ export default function AdminPage() {
 
   const handleFeatureChange = (
     index: number,
-    field: "title" | "description",
+    field: "title" | "description" | "iconUrl",
     value: string
   ) => {
     const newFeatures = [...content.features];
@@ -84,9 +90,15 @@ export default function AdminPage() {
       ...content,
       features: [
         ...content.features,
-        { title: "새로운 특징", description: "설명을 입력하세요" },
+        { title: "새로운 특징", description: "설명을 입력하세요", iconUrl: "" },
       ],
     });
+  };
+
+  const handlePartnerImageChange = (index: number, value: string) => {
+    const newPartnerImages = [...content.partnerImages];
+    newPartnerImages[index] = value;
+    setContent({ ...content, partnerImages: newPartnerImages });
   };
 
   const removeFeature = (index: number) => {
@@ -124,7 +136,7 @@ export default function AdminPage() {
                 onChange={(e) =>
                   setContent({ ...content, title: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500"
+                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
               />
             </div>
 
@@ -139,7 +151,7 @@ export default function AdminPage() {
                 onChange={(e) =>
                   setContent({ ...content, subtitle: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500"
+                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
               />
             </div>
 
@@ -154,7 +166,7 @@ export default function AdminPage() {
                   setContent({ ...content, description: e.target.value })
                 }
                 rows={3}
-                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500"
+                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
               />
             </div>
 
@@ -197,7 +209,7 @@ export default function AdminPage() {
                         handleFeatureChange(index, "title", e.target.value)
                       }
                       placeholder="특징 제목"
-                      className="w-full px-3 py-2 border border-navy-300 rounded mb-2 focus:outline-none focus:ring-2 focus:ring-navy-500"
+                      className="w-full px-3 py-2 border border-navy-300 rounded mb-2 focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
                     />
                     <textarea
                       value={feature.description}
@@ -210,8 +222,25 @@ export default function AdminPage() {
                       }
                       placeholder="특징 설명"
                       rows={2}
-                      className="w-full px-3 py-2 border border-navy-300 rounded focus:outline-none focus:ring-2 focus:ring-navy-500"
+                      className="w-full px-3 py-2 border border-navy-300 rounded mb-2 focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
                     />
+                    <div>
+                      <label className="block text-xs font-medium text-black mb-1">
+                        아이콘 이미지 URL
+                      </label>
+                      <input
+                        type="url"
+                        value={feature.iconUrl}
+                        onChange={(e) =>
+                          handleFeatureChange(index, "iconUrl", e.target.value)
+                        }
+                        placeholder="/icon.svg 또는 https://example.com/icon.svg"
+                        className="w-full px-3 py-2 border border-navy-300 rounded focus:outline-none focus:ring-2 focus:ring-navy-500 text-black text-sm"
+                      />
+                      <p className="mt-1 text-xs text-navy-500">
+                        SVG 또는 이미지 파일의 URL을 입력하세요. 비워두면 기본 아이콘이 사용됩니다.
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -228,7 +257,7 @@ export default function AdminPage() {
                 onChange={(e) =>
                   setContent({ ...content, kakaoLink: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500"
+                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
               />
             </div>
 
@@ -244,7 +273,7 @@ export default function AdminPage() {
                   setContent({ ...content, catalogLink: e.target.value })
                 }
                 placeholder="https://example.com/catalog.pdf"
-                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500"
+                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
               />
               <p className="mt-1 text-xs text-navy-500">
                 PDF 파일의 직접 다운로드 링크 또는 외부 링크를 입력하세요.
@@ -263,10 +292,52 @@ export default function AdminPage() {
                   setContent({ ...content, heroImageUrl: e.target.value })
                 }
                 placeholder="/kr-600.jpg 또는 https://example.com/image.jpg"
-                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500"
+                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
               />
               <p className="mt-1 text-xs text-navy-500">
                 public 폴더 내 이미지는 /파일명 형식으로, 외부 이미지는 전체 URL을 입력하세요.
+              </p>
+            </div>
+
+            {/* Partner Images */}
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <label className="block text-sm font-medium text-black">
+                  영우테크 파트너사 이미지 (5x3, 총 15개)
+                </label>
+              </div>
+              <div className="grid grid-cols-5 gap-4">
+                {content.partnerImages.map((imageUrl, index) => (
+                  <div key={index} className="space-y-2">
+                    <label className="block text-xs font-medium text-black">
+                      이미지 {index + 1}
+                    </label>
+                    <input
+                      type="url"
+                      value={imageUrl}
+                      onChange={(e) =>
+                        handlePartnerImageChange(index, e.target.value)
+                      }
+                      placeholder="이미지 URL"
+                      className="w-full px-3 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black text-sm"
+                    />
+                    {imageUrl && (
+                      <div className="w-full aspect-square border border-navy-200 rounded overflow-hidden bg-navy-50">
+                        <img
+                          src={imageUrl}
+                          alt={`파트너사 ${index + 1}`}
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <p className="mt-2 text-xs text-navy-500">
+                각 파트너사 로고 이미지의 URL을 입력하세요. 5열 3행으로 총 15개의 이미지를 배치할 수 있습니다.
               </p>
             </div>
 

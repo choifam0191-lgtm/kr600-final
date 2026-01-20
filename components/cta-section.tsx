@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { MessageCircle, Phone } from "lucide-react"
+import { MessageCircle } from "lucide-react"
 
 export function CTASection() {
   return (
@@ -19,7 +19,7 @@ export function CTASection() {
             카카오톡으로 간편하게 문의하세요.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col items-center gap-4">
             <Button 
               size="lg" 
               className="text-lg px-10 py-7 gap-3 bg-primary hover:bg-primary/90 text-primary-foreground"
@@ -34,17 +34,13 @@ export function CTASection() {
                 카카오톡 상담하기
               </a>
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="text-lg px-10 py-7 gap-3 border-primary/50 text-foreground hover:bg-primary/10 bg-transparent"
-              asChild
-            >
-              <a href="tel:02-1234-5678">
-                <Phone className="w-5 h-5" />
-                전화 상담
-              </a>
-            </Button>
+            
+            {/* 영우테크 정보 */}
+            <div className="mt-6 pt-6 border-t border-border/50 text-center">
+              <p className="text-sm font-semibold text-foreground mb-2">영우테크</p>
+              <p className="text-sm text-muted-foreground">전화번호: 031-523-2340</p>
+              <p className="text-sm text-muted-foreground">이메일: hichoi333@naver.com</p>
+            </div>
           </div>
         </div>
       </div>

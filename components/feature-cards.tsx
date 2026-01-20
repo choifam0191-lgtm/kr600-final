@@ -1,25 +1,67 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Radio, Volume2, Battery } from "lucide-react"
+import Image from "next/image"
 
-const features = [
+const defaultFeatures = [
   {
     icon: Radio,
     title: "확장된 통신 범위",
     description: "넓은 면적의 호텔과 웨딩홀에서도 끊김 없는 통신을 보장합니다. 최대 5km 범위의 안정적인 연결.",
+    iconUrl: "",
   },
   {
     icon: Volume2,
     title: "크리스탈 클리어 음질",
     description: "노이즈 캔슬링 기술로 시끄러운 연회장에서도 선명한 음성 전달이 가능합니다.",
+    iconUrl: "",
   },
   {
     icon: Battery,
     title: "장시간 배터리",
     description: "한 번 충전으로 48시간 이상 사용 가능. 바쁜 이벤트 시즌에도 걱정 없는 운영.",
+    iconUrl: "",
   },
 ]
 
 export function FeatureCards() {
+  const [features, setFeatures] = useState(defaultFeatures)
+  const [iconErrors, setIconErrors] = useState<Record<number, boolean>>({})
+
+  useEffect(() => {
+    // localStorage에서 특징 데이터 불러오기
+    const loadFeatures = () => {
+      const savedContent = localStorage.getItem("kr600-content")
+      if (savedContent) {
+        try {
+          const content = JSON.parse(savedContent)
+          if (content.features && Array.isArray(content.features)) {
+            // 아이콘 URL이 있는 경우 기본 아이콘과 병합
+            const mergedFeatures = content.features.map((feature: any, index: number) => ({
+              ...defaultFeatures[index] || { icon: Radio, title: "", description: "" },
+              ...feature,
+            }))
+            setFeatures(mergedFeatures)
+            setIconErrors({}) // 새로 로드할 때 에러 상태 초기화
+          }
+        } catch (error) {
+          console.error("Failed to load features:", error)
+        }
+      }
+    }
+
+    loadFeatures()
+    window.addEventListener("storage", loadFeatures)
+    window.addEventListener("localStorageUpdated", loadFeatures)
+
+    return () => {
+      window.removeEventListener("storage", loadFeatures)
+      window.removeEventListener("localStorageUpdated", loadFeatures)
+    }
+  }, [])
+
   return (
     <section id="features" className="py-24 bg-background">
       <div className="container px-4 md:px-6">
@@ -40,7 +82,21 @@ export function FeatureCards() {
             >
               <CardContent className="p-8 flex flex-col items-center text-center gap-4">
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <feature.icon className="w-8 h-8 text-primary" />
+                  {feature.iconUrl && feature.iconUrl.trim() !== "" && !iconErrors[index] ? (
+                    <div className="relative w-8 h-8">
+                      <Image
+                        src={feature.iconUrl}
+                        alt={feature.title}
+                        fill
+                        className="object-contain"
+                        onError={() => {
+                          setIconErrors(prev => ({ ...prev, [index]: true }))
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <feature.icon className="w-8 h-8 text-primary" />
+                  )}
                 </div>
                 <h3 className="text-xl font-semibold text-card-foreground">
                   {feature.title}
