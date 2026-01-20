@@ -38,21 +38,23 @@ export function HeroSection() {
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary via-background to-background opacity-50" />
+
+      {/* Full-width Banner Image */}
+      {heroImageUrl && (
+        <div className="relative w-full h-[260px] sm:h-[340px] md:h-[420px] lg:h-[520px] z-10">
+          <Image
+            src={heroImageUrl}
+            alt="프리미엄 업무용 무전기 KR-600"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
       
       <div className="w-full max-w-7xl mx-auto px-4 relative z-10">
-        <div className="flex flex-col items-center justify-center text-center min-h-[60vh]">
-          {/* Hero Image */}
-          {heroImageUrl && (
-            <div className="relative w-full max-w-md mb-8 aspect-square">
-              <Image
-                src={heroImageUrl}
-                alt="KR-600 프리미엄 무전기"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          )}
+        <div className="flex flex-col items-center justify-center text-center py-12 md:py-16">
           
           {/* Main Copy */}
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-balance leading-[1.3] w-full mb-6">

@@ -97,11 +97,11 @@ export default function AdminPage() {
       setSaved(true);
       setShowToast(true);
       
-      // 2초 후 메인 페이지로 이동
+      // 2초 후 토스트만 닫고, 관리자 페이지에 그대로 유지
       setTimeout(() => {
         setIsSaving(false);
         setShowToast(false);
-        router.push("/");
+        setSaved(false);
       }, 2000);
     } catch (error) {
       console.error("저장 중 오류 발생:", error);
@@ -447,8 +447,7 @@ export default function AdminPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span className="font-semibold">저장 완료!</span>
-                  <span>메인 페이지로 이동합니다...</span>
+                  <span className="font-semibold">성공적으로 저장되었습니다!</span>
                 </div>
               )}
             </div>
