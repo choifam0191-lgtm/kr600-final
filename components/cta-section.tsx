@@ -45,10 +45,8 @@ export function CTASection() {
             <br />
             <span className="text-primary">KR-600</span>의 상세 스펙을 확인해보세요.
           </h2>
-          <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
-            전문 상담사가 귀사에 맞는 최적의 솔루션을 제안해 드립니다.
-            <br />
-            카카오톡으로 간편하게 문의하세요.
+          <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+            복잡한 견적 고민은 이제 그만! 카톡 1분 상담으로 KR-600 최저가 혜택과 대량 구매 할인을 즉시 확인하세요. 전문가가 귀사에 딱 맞는 구성을 제안해 드립니다.
           </p>
           
           <div className="flex flex-col items-center gap-4">
