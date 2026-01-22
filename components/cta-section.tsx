@@ -1,7 +1,38 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { MessageCircle } from "lucide-react"
 
 export function CTASection() {
+  const [kakaoLink, setKakaoLink] = useState<string>("https://open.kakao.com/o/gXXXXXX")
+
+  useEffect(() => {
+    // localStorage에서 카카오톡 링크 불러오기
+    const loadKakaoLink = () => {
+      const savedContent = localStorage.getItem("kr600-content")
+      if (savedContent) {
+        try {
+          const content = JSON.parse(savedContent)
+          if (content.kakaoLink && content.kakaoLink.trim() !== "") {
+            setKakaoLink(content.kakaoLink)
+          }
+        } catch (error) {
+          console.error("Failed to load kakao link:", error)
+        }
+      }
+    }
+
+    loadKakaoLink()
+    window.addEventListener("storage", loadKakaoLink)
+    window.addEventListener("localStorageUpdated", loadKakaoLink)
+
+    return () => {
+      window.removeEventListener("storage", loadKakaoLink)
+      window.removeEventListener("localStorageUpdated", loadKakaoLink)
+    }
+  }, [])
+
   return (
     <section id="cta" className="py-24 relative overflow-hidden bg-secondary">
       {/* Background Effect */}
@@ -27,7 +58,7 @@ export function CTASection() {
               asChild
             >
               <a 
-                href="https://open.kakao.com/o/gXXXXXX" 
+                href={kakaoLink} 
                 target="_blank" 
                 rel="noopener noreferrer"
               >

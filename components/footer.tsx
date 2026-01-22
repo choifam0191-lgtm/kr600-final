@@ -16,6 +16,9 @@ export function Footer() {
               <p>
                 <span className="text-gray-300">주소:</span> 경기 구리시 이문안로 138 (우)11946
               </p>
+              <p>
+                <span className="text-gray-300">통신판매업 신고증 번호:</span> 제 2011-경기구리-0315호
+              </p>
               <div className="flex flex-col md:flex-row md:items-center md:gap-4 gap-2 pt-2">
                 <a
                   href="tel:031-523-2340"

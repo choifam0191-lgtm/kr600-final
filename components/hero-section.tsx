@@ -7,10 +7,11 @@ import { MessageCircle, ArrowRight } from "lucide-react"
 
 export function HeroSection() {
   const [heroImageUrl, setHeroImageUrl] = useState<string>("/kr-600.jpg")
+  const [kakaoLink, setKakaoLink] = useState<string>("https://open.kakao.com/o/gXXXXXX")
 
   useEffect(() => {
-    // localStorage에서 히어로 이미지 URL 불러오기
-    const loadHeroImage = () => {
+    // localStorage에서 히어로 이미지 URL과 카카오톡 링크 불러오기
+    const loadContent = () => {
       const savedContent = localStorage.getItem("kr600-content")
       if (savedContent) {
         try {
@@ -18,24 +19,27 @@ export function HeroSection() {
           if (content.heroImageUrl && content.heroImageUrl.trim() !== "") {
             setHeroImageUrl(content.heroImageUrl)
           }
+          if (content.kakaoLink && content.kakaoLink.trim() !== "") {
+            setKakaoLink(content.kakaoLink)
+          }
         } catch (error) {
-          console.error("Failed to load hero image:", error)
+          console.error("Failed to load content:", error)
         }
       }
     }
 
-    loadHeroImage()
-    window.addEventListener("storage", loadHeroImage)
-    window.addEventListener("localStorageUpdated", loadHeroImage)
+    loadContent()
+    window.addEventListener("storage", loadContent)
+    window.addEventListener("localStorageUpdated", loadContent)
 
     return () => {
-      window.removeEventListener("storage", loadHeroImage)
-      window.removeEventListener("localStorageUpdated", loadHeroImage)
+      window.removeEventListener("storage", loadContent)
+      window.removeEventListener("localStorageUpdated", loadContent)
     }
   }, [])
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pb-12 md:pb-16">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary via-background to-background opacity-50" />
       
@@ -71,7 +75,7 @@ export function HeroSection() {
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto md:mx-0 leading-relaxed mb-8">
               브랜드와 기종 관계없이 보유하고 계신 장비를 반납하시면
               <br />
-              <span className="font-bold text-primary">대당 50,000원</span> 즉시 지원해 드립니다.
+              <span className="font-bold text-primary">대당 50,000원</span> 즉시 할인해 드립니다.
             </p>
             
             {/* Price Visualization */}
@@ -98,7 +102,7 @@ export function HeroSection() {
                 asChild
               >
                 <a 
-                  href="https://open.kakao.com/o/gXXXXXX" 
+                  href={kakaoLink} 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
