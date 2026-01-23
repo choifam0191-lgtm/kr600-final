@@ -29,7 +29,7 @@ export function AboutSection() {
 
           {/* 영우테크 주요 거래처 */}
           <div className="mt-6 pt-6 border-t border-border w-full flex flex-col items-center">
-            <p className="text-base font-semibold text-foreground mb-6">영우테크 주요 거래처</p>
+            <p className="text-2xl md:text-3xl font-bold text-foreground mb-6">영우테크 주요 거래처</p>
             <div className="w-full max-w-[1300px] mx-auto">
               <Image
                 src="/clients_all.png"

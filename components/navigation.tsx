@@ -24,7 +24,7 @@ export function Navigation() {
             onClick={() => scrollToSection("hero")}
             className="text-xl font-bold text-primary"
           >
-            KR-600
+            <span className="whitespace-nowrap">KR-600</span>
           </button>
         </div>
 
@@ -46,7 +46,7 @@ export function Navigation() {
             onClick={() => scrollToSection("features")}
             className="text-sm font-medium text-foreground hover:text-primary transition-colors"
           >
-            KR-600
+            <span className="whitespace-nowrap">KR-600</span>
           </button>
           <button
             onClick={() => scrollToSection("catalog")}
@@ -97,7 +97,7 @@ export function Navigation() {
               onClick={() => scrollToSection("features")}
               className="block w-full text-left text-sm font-medium text-foreground hover:text-primary transition-colors py-2"
             >
-              KR-600
+              <span className="whitespace-nowrap">KR-600</span>
             </button>
             <button
               onClick={() => scrollToSection("catalog")}

@@ -65,7 +65,7 @@ export function HeroSection() {
             {/* Main Copy */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-balance leading-[1.3] w-full mb-6">
               <span className="text-foreground">
-                최신형 <span className="text-primary">KR-600</span>
+                최신형 <span className="text-primary whitespace-nowrap">KR-600</span>
                 <br />
                 보상판매 특별 할인
               </span>

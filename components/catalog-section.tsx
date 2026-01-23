@@ -54,7 +54,7 @@ export function CatalogSection() {
       <div className="w-full max-w-7xl mx-auto px-4">
         <div className="flex flex-col items-center text-center">
           <p className="text-lg text-muted-foreground mb-6">
-            더 자세한 정보가 필요하신가요? <span className="text-primary font-semibold">KR-600</span>의 상세 스펙을 확인해보세요.
+            더 자세한 정보가 필요하신가요? <span className="text-primary font-semibold whitespace-nowrap">KR-600</span>의 상세 스펙을 확인해보세요.
           </p>
           <Button
             onClick={handleDownload}

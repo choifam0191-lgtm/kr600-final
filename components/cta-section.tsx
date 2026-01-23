@@ -40,8 +40,8 @@ export function CTASection() {
       
       <div className="w-full max-w-7xl mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-8 md:mb-10 max-w-xl mx-auto text-balance leading-relaxed">
-            <span className="font-bold">카톡 1분 상담</span>으로 KR-600 최저가 혜택과
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 md:mb-10 max-w-xl mx-auto text-balance leading-relaxed">
+            <span className="font-bold">카톡 1분 상담</span>으로 <span className="whitespace-nowrap">KR-600</span> 최저가 혜택과
             <br />
             대량 구매 할인을 확인해 보세요.
           </h2>
