@@ -13,7 +13,7 @@ const defaultFeatures = [
     iconUrl: "",
   },
   {
-    icon: Volume2,
+    icon: Radio,
     title: "크리스탈 클리어 음질",
     description: "노이즈 캔슬링 기술로 시끄러운 연회장에서도 선명한 음성 전달이 가능합니다.",
     iconUrl: "",
@@ -40,8 +40,8 @@ export function FeatureCards() {
           if (content.features && Array.isArray(content.features) && content.features.length > 0) {
             // localStorage에 저장된 features를 사용하고, icon 필드는 defaultFeatures에서 매핑
             const mergedFeatures = content.features.map((feature: any, index: number) => {
-              // 기본 아이콘 배열 (순서대로 Radio, Volume2, BatteryFull)
-              const defaultIcons = [Radio, Volume2, BatteryFull]
+              // 기본 아이콘 배열 (순서대로 Radio, Radio, BatteryFull) - 두 번째 항목은 Radio
+              const defaultIcons = [Radio, Radio, BatteryFull]
               const defaultIcon = defaultIcons[index] || Radio
               
               return {
@@ -118,7 +118,7 @@ export function FeatureCards() {
                   <h3 className="text-xl font-semibold text-card-foreground">
                     {feature.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
                     {feature.description}
                   </p>
                 </CardContent>

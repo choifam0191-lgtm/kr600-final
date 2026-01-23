@@ -49,10 +49,24 @@ const defaultContent: ContentData = {
 
 export default function AdminPage() {
   const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [content, setContent] = useState<ContentData>(defaultContent);
   const [saved, setSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [showToast, setShowToast] = useState(false);
+
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === "542501") {
+      setIsAuthenticated(true);
+      setPasswordError("");
+    } else {
+      setPasswordError("비밀번호가 올바르지 않습니다.");
+      setPassword("");
+    }
+  };
 
   useEffect(() => {
     // 로컬 스토리지에서 저장된 콘텐츠 불러오기
@@ -143,6 +157,54 @@ export default function AdminPage() {
     }
   };
 
+  // 비밀번호 입력 화면
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-navy-50 flex items-center justify-center px-4">
+        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+          <h1 className="text-3xl font-bold text-black mb-6 text-center">
+            관리자 페이지
+          </h1>
+          <form onSubmit={handlePasswordSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-black mb-2">
+                비밀번호
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setPasswordError("");
+                }}
+                className="w-full px-4 py-2 border border-navy-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 text-black"
+                placeholder="비밀번호를 입력하세요"
+                autoFocus
+              />
+              {passwordError && (
+                <p className="mt-2 text-sm text-red-600">{passwordError}</p>
+              )}
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-navy-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-navy-700 transition-colors"
+            >
+              로그인
+            </button>
+          </form>
+          <div className="mt-4 text-center">
+            <Link
+              href="/"
+              className="text-black hover:text-gray-800 underline text-sm"
+            >
+              메인으로 돌아가기
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-navy-50 py-12 px-4">
       <div className="max-w-4xl mx-auto">
@@ -151,12 +213,20 @@ export default function AdminPage() {
             <h1 className="text-3xl font-bold text-black">
               관리자 페이지
             </h1>
-            <Link
-              href="/"
-              className="text-black hover:text-gray-800 underline"
-            >
-              메인으로 돌아가기
-            </Link>
+            <div className="flex gap-4 items-center">
+              <button
+                onClick={() => setIsAuthenticated(false)}
+                className="text-black hover:text-gray-800 underline text-sm"
+              >
+                로그아웃
+              </button>
+              <Link
+                href="/"
+                className="text-black hover:text-gray-800 underline text-sm"
+              >
+                메인으로 돌아가기
+              </Link>
+            </div>
           </div>
 
           <div className="space-y-6">

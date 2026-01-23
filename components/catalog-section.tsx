@@ -1,52 +1,14 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Download } from "lucide-react"
 
 export function CatalogSection() {
-  const [catalogLink, setCatalogLink] = useState<string>("")
-
-  useEffect(() => {
-    // localStorage에서 카탈로그 링크 불러오기
-    const loadCatalogLink = () => {
-      const savedContent = localStorage.getItem("kr600-content")
-      if (savedContent) {
-        try {
-          const content = JSON.parse(savedContent)
-          if (content.catalogLink) {
-            setCatalogLink(content.catalogLink)
-          } else {
-            setCatalogLink("")
-          }
-        } catch (error) {
-          console.error("Failed to load catalog link:", error)
-        }
-      }
-    }
-
-    // 초기 로드
-    loadCatalogLink()
-
-    // storage 이벤트 리스너 추가 (다른 탭에서 변경 시 감지)
-    window.addEventListener("storage", loadCatalogLink)
-
-    // 같은 탭에서의 변경 감지를 위한 커스텀 이벤트 리스너
-    const handleStorageChange = () => loadCatalogLink()
-    window.addEventListener("localStorageUpdated", handleStorageChange)
-
-    return () => {
-      window.removeEventListener("storage", loadCatalogLink)
-      window.removeEventListener("localStorageUpdated", handleStorageChange)
-    }
-  }, [])
+  // 하드코딩된 고정 값
+  const catalogLink = "/kr600catalog.pdf"
 
   const handleDownload = () => {
-    if (catalogLink) {
-      window.open(catalogLink, "_blank", "noopener,noreferrer")
-    } else {
-      alert("준비 중입니다")
-    }
+    window.open(catalogLink, "_blank", "noopener,noreferrer")
   }
 
   return (

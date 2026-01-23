@@ -1,42 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { MessageCircle, ArrowRight } from "lucide-react"
 
 export function HeroSection() {
-  const [heroImageUrl, setHeroImageUrl] = useState<string>("/kr-600.jpg")
-  const [kakaoLink, setKakaoLink] = useState<string>("https://open.kakao.com/o/gXXXXXX")
-
-  useEffect(() => {
-    // localStorage에서 히어로 이미지 URL과 카카오톡 링크 불러오기
-    const loadContent = () => {
-      const savedContent = localStorage.getItem("kr600-content")
-      if (savedContent) {
-        try {
-          const content = JSON.parse(savedContent)
-          if (content.heroImageUrl && content.heroImageUrl.trim() !== "") {
-            setHeroImageUrl(content.heroImageUrl)
-          }
-          if (content.kakaoLink && content.kakaoLink.trim() !== "") {
-            setKakaoLink(content.kakaoLink)
-          }
-        } catch (error) {
-          console.error("Failed to load content:", error)
-        }
-      }
-    }
-
-    loadContent()
-    window.addEventListener("storage", loadContent)
-    window.addEventListener("localStorageUpdated", loadContent)
-
-    return () => {
-      window.removeEventListener("storage", loadContent)
-      window.removeEventListener("localStorageUpdated", loadContent)
-    }
-  }, [])
+  // 하드코딩된 고정 값
+  const heroImageUrl = "/kr600front2.png"
+  const kakaoLink = "http://pf.kakao.com/_texjAX/chat"
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pb-12 md:pb-16">
