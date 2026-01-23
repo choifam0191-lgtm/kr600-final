@@ -40,14 +40,11 @@ export function CTASection() {
       
       <div className="w-full max-w-7xl mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-            더 자세한 정보가 필요하신가요?
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-8 md:mb-10 max-w-xl mx-auto text-balance leading-relaxed">
+            <span className="font-bold">카톡 1분 상담</span>으로 KR-600 최저가 혜택과
             <br />
-            <span className="text-primary">KR-600</span>의 상세 스펙을 확인해보세요.
+            대량 구매 할인을 확인해 보세요.
           </h2>
-          <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            복잡한 견적 고민은 이제 그만! 카톡 1분 상담으로 KR-600 최저가 혜택과 대량 구매 할인을 즉시 확인하세요. 전문가가 귀사에 딱 맞는 구성을 제안해 드립니다.
-          </p>
           
           <div className="flex flex-col items-center gap-4">
             <Button 
@@ -65,10 +62,10 @@ export function CTASection() {
               </a>
             </Button>
             
-            {/* 영우테크 정보 */}
-            <div className="mt-4 pt-6 border-t border-border/50">
-              <div className="bg-card/50 border border-border rounded-lg p-6 max-w-md mx-auto">
-                <p className="text-lg font-bold text-foreground mb-4">영우테크</p>
+            {/* 전화 및 메일 문의 */}
+            <div className="mt-4 pt-6 border-t border-border/50 w-full max-w-md mx-auto">
+              <div className="bg-card/50 border border-border rounded-lg p-6">
+                <p className="text-lg font-bold text-foreground mb-4">전화 및 메일 문의</p>
                 <div className="space-y-2 text-base text-muted-foreground">
                   <p>전화번호: 031-523-2340</p>
                   <p>이메일: hichoi333@naver.com</p>

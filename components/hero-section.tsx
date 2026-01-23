@@ -75,7 +75,7 @@ export function HeroSection() {
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto md:mx-0 leading-relaxed mb-8">
               브랜드와 기종 관계없이 보유하고 계신 장비를 반납하시면
               <br />
-              <span className="font-bold text-primary">대당 50,000원</span> 즉시 할인해 드립니다.
+              <span className="font-bold text-primary">대당 <span className="text-xl md:text-2xl">50,000원</span></span> 즉시 할인해 드립니다.
             </p>
             
             {/* Price Visualization */}

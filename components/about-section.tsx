@@ -1,39 +1,6 @@
-"use client"
-
-import { useEffect, useState } from "react"
 import Image from "next/image"
 
 export function AboutSection() {
-  const [partnerImages, setPartnerImages] = useState<string[]>(Array(15).fill(""))
-
-  useEffect(() => {
-    // localStorage에서 파트너사 이미지 불러오기
-    const loadPartnerImages = () => {
-      const savedContent = localStorage.getItem("kr600-content")
-      if (savedContent) {
-        try {
-          const content = JSON.parse(savedContent)
-          if (content.partnerImages && Array.isArray(content.partnerImages)) {
-            setPartnerImages(content.partnerImages)
-          }
-        } catch (error) {
-          console.error("Failed to load partner images:", error)
-        }
-      }
-    }
-
-    loadPartnerImages()
-    window.addEventListener("storage", loadPartnerImages)
-    window.addEventListener("localStorageUpdated", loadPartnerImages)
-
-    return () => {
-      window.removeEventListener("storage", loadPartnerImages)
-      window.removeEventListener("localStorageUpdated", loadPartnerImages)
-    }
-  }, [])
-
-  const validImages = partnerImages.filter(url => url && url.trim() !== "")
-
   return (
     <section id="about" className="py-16 md:py-20 bg-background">
       <div className="w-full max-w-7xl mx-auto px-4">
@@ -43,9 +10,9 @@ export function AboutSection() {
             <Image
               src="/logo.png"
               alt="영우테크 로고"
-              width={156}
-              height={156}
-              className="w-[166.4px] md:w-[208px] h-auto"
+              width={130}
+              height={130}
+              className="w-[138px] md:w-[173px] h-auto"
             />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -59,76 +26,20 @@ export function AboutSection() {
               최적의 무전기 솔루션을 제공하고 있습니다.
             </p>
           </div>
-          
-          {/* Trust Badge */}
-          {validImages.length > 0 && (
-            <div className="mt-6 pt-6 border-t border-border">
-              <p className="text-base font-semibold text-foreground mb-6">영우테크 파트너사</p>
-              <div className="grid grid-cols-3 md:grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto">
-                {partnerImages.map((imageUrl, index) => {
-                  if (!imageUrl || imageUrl.trim() === "") return null
-                  
-                  // 이미지 URL 정규화: 공백 제거 및 경로 보정
-                  let normalizedUrl = imageUrl.trim()
-                  
-                  // 상대 경로인 경우 / 추가
-                  if (!normalizedUrl.startsWith('/') && !normalizedUrl.startsWith('http://') && !normalizedUrl.startsWith('https://')) {
-                    normalizedUrl = '/' + normalizedUrl
-                  }
-                  
-                  // public 폴더 내 이미지 경로 보정 (이미 /로 시작하는 경우 그대로 사용)
-                  const isExternalUrl = normalizedUrl.startsWith('http://') || normalizedUrl.startsWith('https://')
-                  
-                  return (
-                    <div
-                      key={`partner-${index}-${normalizedUrl}`}
-                      className="relative w-full aspect-square flex items-center justify-center bg-gray-50 rounded-lg border border-gray-200 opacity-60 hover:opacity-100 transition-opacity overflow-hidden"
-                    >
-                      {isExternalUrl ? (
-                        // 외부 URL인 경우 일반 img 태그 사용
-                        <img
-                          src={normalizedUrl}
-                          alt={`파트너사 ${index + 1}`}
-                          className="w-full h-full object-contain p-2"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement
-                            target.style.display = "none"
-                            const parent = target.parentElement
-                            if (parent && !parent.querySelector('.error-message')) {
-                              const errorDiv = document.createElement("div")
-                              errorDiv.className = "error-message absolute inset-0 flex items-center justify-center text-gray-400 text-xs text-center px-2"
-                              errorDiv.textContent = "이미지 없음"
-                              parent.appendChild(errorDiv)
-                            }
-                          }}
-                        />
-                      ) : (
-                        // 로컬 이미지인 경우 Next.js Image 컴포넌트 사용
-                        <Image
-                          src={normalizedUrl}
-                          alt={`파트너사 ${index + 1}`}
-                          fill
-                          sizes="(max-width: 768px) 33vw, 20vw"
-                          className="object-contain p-2"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement
-                            target.style.display = "none"
-                            const parent = target.parentElement
-                            if (parent && !parent.querySelector('.error-message')) {
-                              const errorDiv = document.createElement("div")
-                              errorDiv.className = "error-message absolute inset-0 flex items-center justify-center text-gray-400 text-xs text-center px-2"
-                              errorDiv.textContent = "이미지 없음"
-                              parent.appendChild(errorDiv)
-                            }
-                          }}
-                        />
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
+
+          {/* 영우테크 주요 거래처 */}
+          <div className="mt-6 pt-6 border-t border-border w-full flex flex-col items-center">
+            <p className="text-base font-semibold text-foreground mb-6">영우테크 주요 거래처</p>
+            <div className="w-full max-w-[1300px] mx-auto">
+              <Image
+                src="/clients_all.png"
+                alt="영우테크 주요 거래처"
+                width={1300}
+                height={400}
+                className="w-full h-auto object-contain"
+              />
             </div>
-          )}
+          </div>
         </div>
       </div>
     </section>
